@@ -118,11 +118,10 @@ public class HomeWorkDLList {
     //year of birth, course, group number, five subject grades.
     //What needs to be done:
     //a) List is to be sorted by course (students are to be sorted by alphabet inside one course)
-    //b) Average grade by all subjects gor each group
+    //b) Average grade by all subjects for each group
     //c) Find out the youngest and the oldest student in university
     //d) Find the best student according to his average grade for each group
 
-    //a)
     private static DLinkedList<String> studentInfo(String str) {
         DLinkedList<String> studInfList = new DLinkedList<>();
         for (int i = 0; i < str.split(" ").length; i++) {
@@ -153,4 +152,82 @@ public class HomeWorkDLList {
         }
         return list;
     }
+
+    //a)
+    private static void sortByCourse(DLinkedList<DLinkedList<String>> list) {
+        DLinkedList<String> tmp;
+        for (int i = list.getLength() - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (Integer.parseInt((list.getNode(j).getValue()).getNode(4).getValue()) >
+                        (Integer.parseInt((list.getNode(j + 1).getValue()).getNode(4).getValue()))) {
+                    tmp = list.getNode(j).getValue();
+                    list.getNode(j).setValue((list.getNode(j + 1).getValue()));
+                    list.getNode(j + 1).setValue(tmp);
+                }
+            }
+        }
+    }
+    private static String studName(DLinkedList<String> list) {
+        StringBuilder sB = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            sB.append(list.getNode(i).getValue());
+        }
+        return sB.toString();
+    }
+    private static void sortByAlphabet(DLinkedList<DLinkedList<String>> list) {
+        DLinkedList<String> tmp;
+        for (int i = list.getLength() - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (!isAlphabet(studName(list.getNode(j).getValue()),
+                        studName(list.getNode(j + 1).getValue()))) {
+                    tmp = list.getNode(j).getValue();
+                    list.getNode(j).setValue((list.getNode(j + 1).getValue()));
+                    list.getNode(j + 1).setValue(tmp);
+                }
+            }
+        }
+    }
+    public static void task8A(DLinkedList<DLinkedList<String>> list) {
+        sortByAlphabet(list);
+        sortByCourse(list);
+    }
+
+    //b)
+    private static DLinkedList<Double> avgGradesGroup(Node<DLinkedList<String>> node) {
+        DLinkedList<Double> gradeList = new DLinkedList<>();
+        int counterStuds = 1;
+        for (int i = 0; i < 5; i++) {
+            gradeList.push(Double.parseDouble(node.getValue().getNode(6 + i).getValue()));
+        }
+        while (node.getNNode() != null && (node.getValue()).getNode(5).getValue().equals
+                ((node.getNNode().getValue()).getNode(5).getValue())) {
+            node = node.getNNode();
+            for (int i = 0; i < 5; i++) {
+                gradeList.getNode(i).setValue(Double.parseDouble(gradeList.getNode(i).getValue().toString()) +
+                                                Double.parseDouble(node.getValue().getNode(6 + i).getValue()));
+            }
+            counterStuds++;
+        }
+        for (int i = 0; i < 5; i++) {
+            gradeList.getNode(i).setValue
+                    ((double)(((int) (100 * gradeList.getNode(i).getValue())) / (counterStuds)) / 100);
+        }
+        return gradeList;
+    }
+    public static  DLinkedList<DLinkedList<Double>> avgGradesList(DLinkedList<DLinkedList<String>> list) {
+        DLinkedList<DLinkedList<Double>> avgGradesList = new DLinkedList<>();
+        Node<DLinkedList<String>> tmp = list.getHead();
+        avgGradesList.push(avgGradesGroup(tmp));
+        while (tmp.getNNode() != null) {
+            tmp = tmp.getNNode();
+            if (!(tmp.getValue()).getNode(5).getValue().
+                                equals((tmp.getPNode().getValue()).getNode(5).getValue())) {
+                avgGradesList.push(avgGradesGroup(tmp));
+            }
+        }
+        return avgGradesList;
+    }
+
+    //c)
+
 }

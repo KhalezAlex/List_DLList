@@ -57,8 +57,14 @@ public class Main {
         //a)
         String path = "Students.txt";
         DLinkedList<DLinkedList<String>> list = HomeWorkDLList.students(new BufferedReader(new FileReader(path)));
+
+        HomeWorkDLList.task8A(list);
         for (int i = 0; i < list.getLength(); i++) {
             list.getNode(i).getValue().print();
+        }
+        DLinkedList<DLinkedList<Double>> gradesList = HomeWorkDLList.avgGradesList(list);
+        for (int i = 0; i < gradesList.getLength(); i++) {
+            gradesList.getNode(i).getValue().print();
         }
     }
 }
