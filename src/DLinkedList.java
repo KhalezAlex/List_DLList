@@ -49,7 +49,7 @@ public class DLinkedList<T> {
             }
             tmp = tmp.getNNode();
         }
-        return null;
+        return new Node<>(null, null, null);
     }
 
     /**Returns last element of the list*/
@@ -80,10 +80,10 @@ public class DLinkedList<T> {
     /**Constructs list containing elements of a specified array*/
     public DLinkedList(T[] arrInput) {
         this.head = new Node<>(arrInput[0]);
+        this.length = 1;
         for (int i = 1; i < arrInput.length; i++) {
             this.push(arrInput[i]);
         }
-        this.length = arrInput.length;
     }
 
     /**Constructs a new list which is a copy of parameter "list"*/
