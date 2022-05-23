@@ -41,7 +41,7 @@ public class DLinkedList<T> {
 
     /**returns first Node with a specified value and null if there is no such a node in the list*/
     //проверить, что лучше вернуть, null или new Node(null, null, null)
-    public Node<T> getNode(Object val) {
+    public Node<T> getNode(T val) {
         Node<T> tmp = this.head;
         while (tmp != null) {
             if (val == tmp.getValue()) {
@@ -241,7 +241,7 @@ public class DLinkedList<T> {
     }
 
     /**deletes all elements with val- value in the list*/
-    public void popAllValues(Object val) {
+    public void popAllValues(T val) {
         Node<T> tmp = this.head;
         int count = 0;
         while (tmp != null) {
@@ -300,10 +300,10 @@ public class DLinkedList<T> {
 
     /**returns the amount of elements in the list with unique values*/
     public int uniqueValues() {
-        DLinkedList<T> dLList = new DLinkedList<>(this);
+        DLinkedList<T> list = new DLinkedList<>(this);
         int countUnique = 0;
-        while (dLList.getHead().getValue() != null) {
-            dLList.popAllValues(dLList.getHead().getValue());
+        while (list.getHead().getValue() != null) {
+            list.popAllValues(list.getHead().getValue());
             countUnique++;
         }
         return countUnique;

@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class HomeWorkDLList {
     //Task0: You have an alphabet-ordered list of books. Insert a new book, saving the alphabet order
 
@@ -86,7 +89,7 @@ public class HomeWorkDLList {
         }
         return counter == 0;
     }
-    public static void posSort(DLinkedList<Integer> list) {
+    public static void task2A(DLinkedList<Integer> list) {
         if (list.getHead().getValue() <= 0) {
             for (int i = 0; i < list.getLength() - 1; i++) {
                 Node<Integer> node1 = getNextPos(list.getHead());
@@ -109,4 +112,45 @@ public class HomeWorkDLList {
         }
     }
 
+
+
+    //Task8: You have a list of students. Every element contains: second name, father name, first name,
+    //year of birth, course, group number, five subject grades.
+    //What needs to be done:
+    //a) List is to be sorted by course (students are to be sorted by alphabet inside one course)
+    //b) Average grade by all subjects gor each group
+    //c) Find out the youngest and the oldest student in university
+    //d) Find the best student according to his average grade for each group
+
+    //a)
+    private static DLinkedList<String> studentInfo(String str) {
+        DLinkedList<String> studInfList = new DLinkedList<>();
+        for (int i = 0; i < str.split(" ").length; i++) {
+            if ((i % 2) != 0) {
+                if (i / 2 == 0) {
+                    studInfList.push(str.split(" ")[i], 0);
+                }
+                else {
+                    studInfList.push(str.split(" ")[i]);
+                }
+            }
+        }
+        return studInfList;
+    }
+    public static DLinkedList<DLinkedList<String>> students(BufferedReader br) throws IOException {
+        DLinkedList<DLinkedList<String>> list = new DLinkedList<>();
+        String str = br.readLine();
+        list.push(studentInfo(str), 0);
+        while (true) {
+            try {
+                if ((str = br.readLine()) == null) {
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            list.push(studentInfo(str));
+        }
+        return list;
+    }
 }
