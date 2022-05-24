@@ -46,7 +46,7 @@ public class HomeWorkDLList {
         }
         return list;
     }
-    public static DLinkedList<Integer> task1(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
+    public static DLinkedList<Integer> task01(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
         Node<Integer> node1;
         Node<Integer> node2;
 
@@ -89,7 +89,7 @@ public class HomeWorkDLList {
         }
         return counter == 0;
     }
-    public static void task2A(DLinkedList<Integer> list) {
+    public static void task02A(DLinkedList<Integer> list) {
         if (list.getHead().getValue() <= 0) {
             for (int i = 0; i < list.getLength() - 1; i++) {
                 Node<Integer> node1 = getNextPos(list.getHead());
@@ -112,6 +112,96 @@ public class HomeWorkDLList {
         }
     }
 
+    private static Node<Integer> getNextEvenInd(Node<Integer> node) {
+        return node.getNNode().getNNode();
+    }
+    public static void task02B(DLinkedList<Integer> list) {
+        for (int i = 0; i < list.getLength() / 2; i++) {
+            Node<Integer> node1 = list.getHead();
+            Node<Integer> node2 = getNextEvenInd(list.getHead());
+            while (node2 != null) {
+                if (node1.getValue() > node2.getValue()) {
+                    Integer tmp = node1.getValue();
+                    node1.setValue(node2.getValue());
+                    node2.setValue(tmp);
+                }
+                node1 = getNextEvenInd(node1);
+                node2 = getNextEvenInd(node2);
+            }
+        }
+    }
+
+
+
+    //Task3: You have two lists. Find out if their sets are identical
+    public static boolean task03(DLinkedList<Integer> listA, DLinkedList<Integer> listB) {
+        if (listA.getLength() != listB.getLength()) {
+            return false;
+        }
+        DLinkedList<Integer> list1 = new DLinkedList<>(listA);
+        DLinkedList<Integer> list2 = new DLinkedList<>(listB);
+        int length = list2.getLength();
+        while (list1.getHead().getValue() != null) {
+            list2.popValue(list1.getHead().getValue());
+            if (list2.getLength() == length) {
+                return false;
+            }
+            list1.popHead();
+            length = list2.getLength();
+        }
+        return list2.isVoid();
+    }
+
+    //Task4:
+    public static void task04(DLinkedList<Character> list) {
+        Node<Character> nodeIndex;
+        Node<Character> nodeTmp;
+        for (int index = list.getLength() - 1; index > 0; index--) {
+            nodeIndex = list.getHead();
+            nodeTmp = list.getHead();
+            for (int i = 0; i < index; i++) {
+                nodeIndex = nodeIndex.getNNode();
+            }
+            if (index == list.getLength() - 1) {
+                for (int j = 0; j < index; j++) {
+                    list.push(nodeTmp.getValue());
+                    nodeTmp = nodeTmp.getNNode();
+                }
+            } else {
+                for (int j = 0; j < index; j++) {
+                    list.push(nodeTmp.getValue(), index + j + 1);
+                    nodeTmp = nodeTmp.getNNode();
+                }
+            }
+        }
+    }
+
+    //Task5: The list contains words from the sentence. Replace all words "imathrepetitor" with a word "silence"
+    public static void task05(DLinkedList<String> list, String prevWord, String changeWord) {
+        Node<String> tmp = list.getHead();
+        while (tmp != null) {
+            if (tmp.getValue().equals(prevWord)) {
+                tmp.setValue(changeWord);
+            }
+            tmp = tmp.getNNode();
+        }
+    }
+
+    //Task6: You Have a text file. Get a double linked list which elements contain numbers of characters in each line
+    public static DLinkedList<Integer> task06(BufferedReader bR) throws IOException {
+        DLinkedList<Integer> list = new DLinkedList<>();
+        String str = bR.readLine();
+        list.setHead(new Node<>(str.length()));
+        while (true) {
+            try {
+                if ((str = bR.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            list.push(str.length());
+        }
+        return list;
+    }
 
 
     //Task8: You have a list of students. Every element contains: second name, first name, father name,

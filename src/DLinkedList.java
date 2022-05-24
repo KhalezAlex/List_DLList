@@ -20,7 +20,7 @@ public class DLinkedList<T> {
         return head;
     }
 
-    private void setHead(Node<T> head) {
+    public void setHead(Node<T> head) {
         this.head = head;
     }
 

@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -39,12 +37,43 @@ public class Main {
 
 
         //Task2: You have a list of integer values. Next elements are to be sorted in ascending order:
-        // a) Positive valued elements b) even index number elements
+        // a) Positive valued elements b) Even index number elements
         /*Integer[] arrayOfIntsTask2 = {-99, 77, 73, 62, -45, 34, 14, -7, 2, 1, 4, -128};
         DLinkedList<Integer> list = new DLinkedList<>(arrayOfIntsTask2);
         list.print();
-        HomeWorkDLList.task2A(list);
+        HomeWorkDLList.task02A(list);
+        list.print();
+        HomeWorkDLList.task02B(list);
         list.print();*/
+
+
+        //Task3: You have two lists. Find out if their sets are identical
+        /*Integer[] arrayOfInts =          {-99, 77, 73, 62, -45, 34, 14, -7, 2, 1, 4, -128};
+        Integer[] arrayOfIntsShuffled =  {-99, -45, 34, 4, 1, 2, -7, 77, 73, 62, 14, -128};
+        DLinkedList<Integer> list1 = new DLinkedList<>(arrayOfInts);
+        DLinkedList<Integer> list2 = new DLinkedList<>(arrayOfIntsShuffled);
+        System.out.println(HomeWorkDLList.task03(list1,list2));*/
+
+        //Task4: You have a list. Insert previous part of the list after each element
+        /*Character[] charArray = {'a', 'b', 'c', 'd', 'e', 'f'};
+        DLinkedList<Character> list = new DLinkedList<>(charArray);
+        list.print();
+        HomeWorkDLList.task04(list);
+        list.print();*/
+
+        //Task5: The list contains words from the sentence. Replace all words "imathrepetitor" with a word "silence"
+        /*String[] sentence = {"imathrepetitor", "Bible", "Decameron", "imathrepetitor", "Diary of a Bookseller", "imathrepetitor",
+                "Joker", "Joker", "Jeeves and Wooster", "imathrepetitor", "imathrepetitor", "imathrepetitor",
+                "Jungle book", "Lord of the Rings", "Treasure Island", "imathrepetitor"};
+        String wordPrev = "imathrepetitor";
+        String wordNew = "silence";
+        DLinkedList<String> list = new DLinkedList<>(sentence);
+        HomeWorkDLList.task05(list, wordPrev, wordNew);
+        list.print();*/
+
+        //Task6: You Have a text file. Get a double linked list which elements contain numbers of characters in each line
+        String path = "Students.txt";
+        HomeWorkDLList.task06(new BufferedReader(new FileReader(path))).print();
 
 
         //Task8: You have a list of students. Every element contains: second name, father name, first name,
