@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -53,18 +54,29 @@ public class Main {
         //b) Average grade by all subjects gor each group
         //c) Find out the youngest and the oldest student in university
         //d) Find the best student according to his average grade for each group
-
+        /*
         //a)
-        String path = "Students.txt";
-        DLinkedList<DLinkedList<String>> list = HomeWorkDLList.students(new BufferedReader(new FileReader(path)));
+        String path = "StudentsBuffer.txt";
+        DLinkedList<Student> studList = HomeWorkDLList.students(new BufferedReader(new FileReader(path)));
+        HomeWorkDLList.task08A(studList);
+        for (int i = 0; i < studList.getLength(); i++) {
+            studList.getNode(i).getValue().print();
+        }
 
-        HomeWorkDLList.task8A(list);
-        for (int i = 0; i < list.getLength(); i++) {
-            list.getNode(i).getValue().print();
-        }
-        DLinkedList<DLinkedList<Double>> gradesList = HomeWorkDLList.avgGradesList(list);
+        //b)
+        DLinkedList<Double[]> gradesList = HomeWorkDLList.task08B(studList);
         for (int i = 0; i < gradesList.getLength(); i++) {
-            gradesList.getNode(i).getValue().print();
+            System.out.println(Arrays.toString(gradesList.getNode(i).getValue()));
         }
+
+        //c)
+        System.out.println("Самый молодой студент- " + HomeWorkDLList.task08C(studList,true));
+        System.out.println("Самый старший студент- " + HomeWorkDLList.task08C(studList, false));
+
+        //d)
+        DLinkedList<String> bestStuds = HomeWorkDLList.task08D(studList);
+        for (int i = 0; i < bestStuds.getLength(); i++) {
+            System.out.println(bestStuds.getNode(i).getValue());
+        }*/
     }
 }

@@ -1,127 +1,9 @@
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
-public class HomeWorkDLList {
-    //Task0: You have an alphabet-ordered list of books. Insert a new book, saving the alphabet order
-
-    private static boolean isAlphabet(String word1, String word2) {
-        for (int i = 0; i < Math.min(word1.length(), word2.length()); i++) {
-            if (Character.toLowerCase(word1.charAt(i)) != Character.toLowerCase(word2.charAt(i))) {
-                return (Character.toLowerCase(word1.charAt(i)) < Character.toLowerCase(word2.charAt(i)));
-            }
-        }
-        return (word1.length() < word2.length());
-    }
-    public static void task0(DLinkedList<String> list, String book) {
-        if (isAlphabet(book, list.getHead().getValue())) {
-            list.push(book, 0);
-        } else {
-            Node<String> tmp = list.getHead();
-            while (tmp.getNNode() != null) {
-                if (isAlphabet(tmp.getValue(), book) && isAlphabet(book, tmp.getNNode().getValue())) {
-                    Node<String> newNode = new Node<>(book, tmp.getNNode(), tmp);
-                    tmp.getNNode().setPNode(newNode);
-                    tmp.setNNode(newNode);
-                    return;
-                }
-                tmp = tmp.getNNode();
-            }
-            tmp.setNNode(new Node<>(book, null, tmp));
-        }
-    }
-
-
-
-    //Task1: You have 2 descend-ordered lists. Merge them and get one descend-ordered list
-    private static DLinkedList<Integer> merge(DLinkedList<Integer> list, Node<Integer> node1, Node<Integer> node2) {
-        int count = 0;
-        while (node1 != null && node2 != null) {
-            if ( node2.getValue() >= node1.getValue()) {
-                list.push(node2.getValue(), count);
-                node2 = node2.getNNode();
-            } else {
-                node1 = node1.getNNode();
-            }
-            count++;
-        }
-        return list;
-    }
-    public static DLinkedList<Integer> task1(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
-        Node<Integer> node1;
-        Node<Integer> node2;
-
-        if (list1.getLength() >= list2.getLength()) {
-            node1 = list1.getHead();
-            node2 = list2.getHead();
-            return merge(list1, node1, node2);
-        } else {
-            node1 = list2.getHead();
-            node2 = list1.getHead();
-            return merge(list2, node1, node2);
-        }
-    }
-
-
-
-    //Task2: You have a list of integer values. Next elements are to be sorted in ascending order:
-    // a) Positive valued elements b) even index number elements
-    private static Node<Integer> getNextPos(Node<Integer> node) {
-        while (node.getNNode() != null) {
-            node = node.getNNode();
-            if (node.getValue() > 0) {
-                return node;
-            }
-        }
-        return null;
-    }
-    private static boolean bubbleIteration(Node<Integer> node1, Node<Integer> node2) {
-        int counter = 0;
-        while (node2 != null) {
-            assert node1 != null;
-            if (node1.getValue() > node2.getValue()) {
-                Integer tmp  = node1.getValue();
-                node1.setValue(node2.getValue());
-                node2.setValue(tmp);
-                counter++;
-            }
-            node1 = getNextPos(node1);
-            node2 = getNextPos(node2);
-        }
-        return counter == 0;
-    }
-    public static void task2A(DLinkedList<Integer> list) {
-        if (list.getHead().getValue() <= 0) {
-            for (int i = 0; i < list.getLength() - 1; i++) {
-                Node<Integer> node1 = getNextPos(list.getHead());
-                Node<Integer> node2 = getNextPos(list.getHead());
-                assert node2 != null;
-                node2 = getNextPos(node2);
-                if (bubbleIteration(node1, node2)) {
-                    break;
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < list.getLength() - 1; i++) {
-                Node<Integer> node1 = list.getHead();
-                Node<Integer> node2 = getNextPos(list.getHead());
-                if (bubbleIteration(node1, node2)) {
-                    break;
-                }
-            }
-        }
-    }
-
-
-
-    //Task8: You have a list of students. Every element contains: second name, first name, father name,
-    //year of birth, course, group number, five subject grades.
-    //What needs to be done:
-    //a) List is to be sorted by course (students are to be sorted in alphabet order inside one course)
-    //b) List with five average subject grades for each group
-    //c) Find out who is the youngest and the oldest student in university
-    //d) Find the best student according to his average grade for each group
-
+public class Buffer {
     private static Student studentInfo(String str) {
         String[] sA = str.split(" ");
         String[] name = new String[]{sA[0], sA[1], sA[2]};
@@ -148,7 +30,15 @@ public class HomeWorkDLList {
         return list;
     }
 
-    //a)
+
+    private static boolean isAlphabet(String w1, String w2) {
+        for (int i = 0; i < Math.min(w1.length(), w2.length()); i++) {
+            if (Character.toLowerCase(w1.charAt(i)) != Character.toLowerCase(w2.charAt(i))) {
+                return (Character.toLowerCase(w1.charAt(i)) < Character.toLowerCase(w2.charAt(i)));
+            }
+        }
+        return (w1.length() < w2.length());
+    }
     private static void sortByCourse(DLinkedList<Student> list) {
         Student tmp;
         for (int i = list.getLength() - 1; i > 0; i--) {
@@ -186,7 +76,7 @@ public class HomeWorkDLList {
         sortByCourse(list);
     }
 
-    //b)
+
     private static Double[] avgGradesGroup(Node<Student> node) {
         Double[] avgGr = {0.0, 0.0, 0.0, 0.0, 0.0};
         int counterStuds = 0;
@@ -218,7 +108,7 @@ public class HomeWorkDLList {
         return avgGradesList;
     }
 
-    //c)
+
     private static String young(Node<Student> stud) {
         String name = stud.getValue().getName()[0].concat(" ").concat(stud.getValue().getName()[1]).
                 concat(" ").concat(stud.getValue().getName()[2]);
@@ -255,7 +145,7 @@ public class HomeWorkDLList {
         }
     }
 
-    //d)
+
     private static String bestGrStud(Node<Student> stud) {
         String name = stud.getValue().getName()[0].concat(" ").concat(stud.getValue().getName()[1]).
                 concat(" ").concat(stud.getValue().getName()[2]);
@@ -282,5 +172,25 @@ public class HomeWorkDLList {
             }
         }
         return avgGrList;
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        String path = "StudentsBuffer.txt";
+        DLinkedList<Student> studList = students(new BufferedReader(new FileReader(path)));
+        task08A(studList);
+        for (int i = 0; i < studList.getLength(); i++) {
+            studList.getNode(i).getValue().print();
+        }
+        DLinkedList<Double[]> gradesList = task08B(studList);
+        for (int i = 0; i < gradesList.getLength(); i++) {
+            System.out.println(Arrays.toString(gradesList.getNode(i).getValue()));
+        }
+        System.out.println("Самый молодой студент- " + task08C(studList,true));
+        System.out.println("Самый старший студент- " + task08C(studList, false));
+        DLinkedList<String> bestStuds = task08D(studList);
+        for (int i = 0; i < bestStuds.getLength(); i++) {
+            System.out.println(bestStuds.getNode(i).getValue());
+        }
     }
 }
