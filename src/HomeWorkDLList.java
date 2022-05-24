@@ -74,14 +74,17 @@ public class HomeWorkDLList {
         }
         return null;
     }
+    private static void changeValues(Node<Integer> node1, Node<Integer> node2) {
+        Integer tmp = node1.getValue();
+        node1.setValue(node2.getValue());
+        node2.setValue(tmp);
+    }
     private static boolean bubbleIteration(Node<Integer> node1, Node<Integer> node2) {
         int counter = 0;
         while (node2 != null) {
             assert node1 != null;
             if (node1.getValue() > node2.getValue()) {
-                Integer tmp  = node1.getValue();
-                node1.setValue(node2.getValue());
-                node2.setValue(tmp);
+                changeValues(node1, node2);
                 counter++;
             }
             node1 = getNextPos(node1);
@@ -89,26 +92,32 @@ public class HomeWorkDLList {
         }
         return counter == 0;
     }
-    public static void task02A(DLinkedList<Integer> list) {
-        if (list.getHead().getValue() <= 0) {
-            for (int i = 0; i < list.getLength() - 1; i++) {
-                Node<Integer> node1 = getNextPos(list.getHead());
-                Node<Integer> node2 = getNextPos(list.getHead());
-                assert node2 != null;
-                node2 = getNextPos(node2);
-                if (bubbleIteration(node1, node2)) {
-                    break;
-                }
+    private static void ifNegativeHead(DLinkedList<Integer> list) {
+        for (int i = 0; i < list.getLength() - 1; i++) {
+            Node<Integer> node1 = getNextPos(list.getHead());
+            Node<Integer> node2 = getNextPos(list.getHead());
+            assert node2 != null;
+            node2 = getNextPos(node2);
+            if (bubbleIteration(node1, node2)) {
+                break;
             }
         }
-        else {
-            for (int i = 0; i < list.getLength() - 1; i++) {
-                Node<Integer> node1 = list.getHead();
-                Node<Integer> node2 = getNextPos(list.getHead());
-                if (bubbleIteration(node1, node2)) {
-                    break;
-                }
+    }
+    private static void ifPositiveHead(DLinkedList<Integer> list) {
+        for (int i = 0; i < list.getLength() - 1; i++) {
+            Node<Integer> node1 = list.getHead();
+            Node<Integer> node2 = getNextPos(list.getHead());
+            if (bubbleIteration(node1, node2)) {
+                break;
             }
+        }
+    }
+    public static void task02A(DLinkedList<Integer> list) {
+        if (list.getHead().getValue() <= 0) {
+            ifNegativeHead(list);
+        }
+        else {
+            ifPositiveHead(list);
         }
     }
 
@@ -121,9 +130,7 @@ public class HomeWorkDLList {
             Node<Integer> node2 = getNextEvenInd(list.getHead());
             while (node2 != null) {
                 if (node1.getValue() > node2.getValue()) {
-                    Integer tmp = node1.getValue();
-                    node1.setValue(node2.getValue());
-                    node2.setValue(tmp);
+                    changeValues(node1, node2);
                 }
                 node1 = getNextEvenInd(node1);
                 node2 = getNextEvenInd(node2);
