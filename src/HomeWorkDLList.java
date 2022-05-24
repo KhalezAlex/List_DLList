@@ -3,7 +3,6 @@ import java.io.IOException;
 
 public class HomeWorkDLList {
     //Task0: You have an alphabet-ordered list of books. Insert a new book, saving the alphabet order
-
     private static boolean isAlphabet(String word1, String word2) {
         for (int i = 0; i < Math.min(word1.length(), word2.length()); i++) {
             if (Character.toLowerCase(word1.charAt(i)) != Character.toLowerCase(word2.charAt(i))) {
@@ -29,7 +28,6 @@ public class HomeWorkDLList {
             tmp.setNNode(new Node<>(book, null, tmp));
         }
     }
-
 
 
     //Task1: You have 2 descend-ordered lists. Merge them and get one descend-ordered list
@@ -60,7 +58,6 @@ public class HomeWorkDLList {
             return merge(list2, node1, node2);
         }
     }
-
 
 
     //Task2: You have a list of integer values. Next elements are to be sorted in ascending order:
@@ -124,20 +121,22 @@ public class HomeWorkDLList {
     private static Node<Integer> getNextEvenInd(Node<Integer> node) {
         return node.getNNode().getNNode();
     }
-    public static void task02B(DLinkedList<Integer> list) {
-        for (int i = 0; i < list.getLength() / 2; i++) {
-            Node<Integer> node1 = list.getHead();
-            Node<Integer> node2 = getNextEvenInd(list.getHead());
-            while (node2 != null) {
-                if (node1.getValue() > node2.getValue()) {
-                    changeValues(node1, node2);
-                }
-                node1 = getNextEvenInd(node1);
-                node2 = getNextEvenInd(node2);
+    private static void evenBubbleIteration (DLinkedList<Integer> list) {
+        Node<Integer> node1 = list.getHead();
+        Node<Integer> node2 = getNextEvenInd(list.getHead());
+        while (node2 != null) {
+            if (node1.getValue() > node2.getValue()) {
+                changeValues(node1, node2);
             }
+            node1 = getNextEvenInd(node1);
+            node2 = getNextEvenInd(node2);
         }
     }
-
+    public static void task02B(DLinkedList<Integer> list) {
+        for (int i = 0; i < list.getLength() / 2; i++) {
+            evenBubbleIteration(list);
+        }
+    }
 
 
     //Task3: You have two lists. Find out if their sets are identical
@@ -158,6 +157,7 @@ public class HomeWorkDLList {
         }
         return list2.isVoid();
     }
+
 
     //Task4:
     public static void task04(DLinkedList<Character> list) {
@@ -183,6 +183,7 @@ public class HomeWorkDLList {
         }
     }
 
+
     //Task5: The list contains words from the sentence. Replace all words "imathrepetitor" with a word "silence"
     public static void task05(DLinkedList<String> list, String prevWord, String changeWord) {
         Node<String> tmp = list.getHead();
@@ -194,11 +195,11 @@ public class HomeWorkDLList {
         }
     }
 
+
     //Task6: You Have a text file. Get a double linked list which elements contain numbers of characters in each line
-    public static DLinkedList<Integer> task06(BufferedReader bR) throws IOException {
-        DLinkedList<Integer> list = new DLinkedList<>();
+    private static void initializeList(DLinkedList<Integer> list, BufferedReader bR) throws IOException {
         String str = bR.readLine();
-        list.setHead(new Node<>(str.length()));
+        list.push(str.length());
         while (true) {
             try {
                 if ((str = bR.readLine()) == null) break;
@@ -207,6 +208,10 @@ public class HomeWorkDLList {
             }
             list.push(str.length());
         }
+    }
+    public static DLinkedList<Integer> task06(BufferedReader bR) throws IOException {
+        DLinkedList<Integer> list = new DLinkedList<>();
+        initializeList(list, bR);
         return list;
     }
 

@@ -38,13 +38,13 @@ public class Main {
 
         //Task2: You have a list of integer values. Next elements are to be sorted in ascending order:
         // a) Positive valued elements b) Even index number elements
-        Integer[] arrayOfIntsTask2 = {-99, 77, 73, 62, -45, 34, 14, -7, 2, 1, 4, -128};
+        /*Integer[] arrayOfIntsTask2 = {-99, 77, 73, 62, -45, 34, 14, -7, 2, 1, 4, -128};
         DLinkedList<Integer> list = new DLinkedList<>(arrayOfIntsTask2);
         list.print();
         HomeWorkDLList.task02A(list);
         list.print();
         HomeWorkDLList.task02B(list);
-        list.print();
+        list.print();*/
 
 
         //Task3: You have two lists. Find out if their sets are identical
@@ -72,8 +72,8 @@ public class Main {
         list.print();*/
 
         //Task6: You Have a text file. Get a double linked list which elements contain numbers of characters in each line
-        /*String path = "Students.txt";
-        HomeWorkDLList.task06(new BufferedReader(new FileReader(path))).print();*/
+        String path = "Students.txt";
+        HomeWorkDLList.task06(new BufferedReader(new FileReader(path))).print();
 
 
         //Task8: You have a list of students. Every element contains: second name, father name, first name,
