@@ -149,13 +149,15 @@ public class DLinkedList<T> {
             this.pushHead(val);
         }
         else {
-            Node<T> tmp = this.head;
-            for (int i = 0; i < index - 1 && tmp.getNNode() != null; i++) {
-                tmp = tmp.getNNode();
+            if (index < this.length) {
+                Node<T> tmp = this.head;
+                for (int i = 0; i < index - 1 && tmp.getNNode() != null; i++) {
+                    tmp = tmp.getNNode();
+                }
+                Node<T> node = new Node<>(val, tmp.getNNode(), tmp);
+                node.getNNode().setPNode(node);
+                tmp.setNNode(node);
             }
-            Node<T> node = new Node<>(val, tmp.getNNode(), tmp);
-            node.getNNode().setPNode(node);
-            tmp.setNNode(node);
         }
         this.length++;
     }
