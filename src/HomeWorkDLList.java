@@ -47,17 +47,10 @@ public class HomeWorkDLList {
     }
 
     public static DLinkedList<Integer> task01(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
-        Node<Integer> node1;
-        Node<Integer> node2;
-
         if (list1.getLength() >= list2.getLength()) {
-            node1 = list1.getHead();
-            node2 = list2.getHead();
-            return merge(list1, node1, node2);
+            return merge(list1, list1.getHead(), list2.getHead());
         } else {
-            node1 = list2.getHead();
-            node2 = list1.getHead();
-            return merge(list2, node1, node2);
+            return merge(list2, list2.getHead(), list1.getHead());
         }
     }
 
