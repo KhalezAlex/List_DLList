@@ -13,17 +13,17 @@ public class HomeWorkDLList {
     }
 
     private static void pushNotHead(DLinkedList<String> list, String book) {
-        Node<String> tmp = list.getHead();
-        while (tmp.getNNode() != null) {
-            if (isAlphabet(tmp.getValue(), book) && isAlphabet(book, tmp.getNNode().getValue())) {
-                Node<String> newNode = new Node<>(book, tmp.getNNode(), tmp);
-                tmp.getNNode().setPNode(newNode);
-                tmp.setNNode(newNode);
+        Node<String> bookTmp = list.getHead();
+        while (bookTmp.getNNode() != null) {
+            if (isAlphabet(bookTmp.getValue(), book) && isAlphabet(book, bookTmp.getNNode().getValue())) {
+                Node<String> nodeTmp = new Node<>(book, bookTmp.getNNode(), bookTmp);
+                bookTmp.getNNode().setPNode(nodeTmp);
+                bookTmp.setNNode(nodeTmp);
                 return;
             }
-            tmp = tmp.getNNode();
+            bookTmp = bookTmp.getNNode();
         }
-        tmp.setNNode(new Node<>(book, null, tmp));
+        bookTmp.setNNode(new Node<>(book, null, bookTmp));
     }
 
     public static void task0(DLinkedList<String> list, String book) {
@@ -72,9 +72,9 @@ public class HomeWorkDLList {
     }
 
     private static void changeValues(Node<Integer> node1, Node<Integer> node2) {
-        Integer tmp = node1.getValue();
+        Integer intTmp = node1.getValue();
         node1.setValue(node2.getValue());
-        node2.setValue(tmp);
+        node2.setValue(intTmp);
     }
 
     private static boolean bubbleIteration(Node<Integer> node1, Node<Integer> node2) {
@@ -170,48 +170,48 @@ public class HomeWorkDLList {
 
 
     //Task4: You have a list. Insert previous part of the list after each element
-    private static void pushLastInd(DLinkedList<Character> list, Node<Character> tmp, int index) {
-        for (int j = 0; j < index; j++) {
-            list.push(tmp.getValue());
-            tmp = tmp.getNNode();
+    private static void pushLastInd(DLinkedList<Character> list, Node<Character> charTmp, int index) {
+        for (int i = 0; i < index; i++) {
+            list.push(charTmp.getValue());
+            charTmp = charTmp.getNNode();
         }
     }
 
-    private static void pushNotLastInd(DLinkedList<Character> list, Node<Character> tmp, int index) {
-        for (int j = 0; j < index; j++) {
-            list.push(tmp.getValue(), index + j + 1);
-            tmp = tmp.getNNode();
+    private static void pushNotLastInd(DLinkedList<Character> list, Node<Character> charTmp, int index) {
+        for (int i = 0; i < index; i++) {
+            list.push(charTmp.getValue(), index + i + 1);
+            charTmp = charTmp.getNNode();
         }
     }
 
     private static void pushIteration(DLinkedList<Character> list, int index) {
         Node<Character> nodeIndex = list.getHead();
-        Node<Character> tmp = list.getHead();
+        Node<Character> charTmp = list.getHead();
         for (int i = 0; i < index; i++) {
             nodeIndex = nodeIndex.getNNode();
         }
         if (index == list.getLength() - 1) {
-            pushLastInd(list, tmp, index);
+            pushLastInd(list, charTmp, index);
         } else {
-            pushNotLastInd(list, tmp, index);
+            pushNotLastInd(list, charTmp, index);
         }
     }
 
     public static void task04(DLinkedList<Character> list) {
-        for (int index = list.getLength() - 1; index > 0; index--) {
-            pushIteration(list, index);
+        for (int i = list.getLength() - 1; i > 0; i--) {
+            pushIteration(list, i);
         }
     }
 
 
     //Task5: The list contains words from the sentence. Replace all words "imathrepetitor" with a word "silence"
     public static void task05(DLinkedList<String> list, String prevWord, String changeWord) {
-        Node<String> tmp = list.getHead();
-        while (tmp != null) {
-            if (tmp.getValue().equals(prevWord)) {
-                tmp.setValue(changeWord);
+        Node<String> stringTmp = list.getHead();
+        while (stringTmp != null) {
+            if (stringTmp.getValue().equals(prevWord)) {
+                stringTmp.setValue(changeWord);
             }
-            tmp = tmp.getNNode();
+            stringTmp = stringTmp.getNNode();
         }
     }
 
@@ -263,13 +263,13 @@ public class HomeWorkDLList {
 
     //a)
     private static void sortByCourse(DLinkedList<Student> list) {
-        Student tmp;
+        Student studTmp;
         for (int i = list.getLength() - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (list.getNode(j).getValue().getCourse() > list.getNode(j + 1).getValue().getCourse()) {
-                    tmp = list.getNode(j).getValue();
+                    studTmp = list.getNode(j).getValue();
                     list.getNode(j).setValue((list.getNode(j + 1).getValue()));
-                    list.getNode(j + 1).setValue(tmp);
+                    list.getNode(j + 1).setValue(studTmp);
                 }
             }
         }
