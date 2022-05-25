@@ -86,7 +86,7 @@ public class Main {
         //b) Average subject grades gor each group
         //c) Find out who is the youngest and the oldest student in university
         //d) Find the best student according to his average grade for each group
-        /*
+
         //a)
         String path = "StudentsBuffer.txt";
         DLinkedList<Student> studList = HomeWorkDLList.students(new BufferedReader(new FileReader(path)));
@@ -94,7 +94,7 @@ public class Main {
         for (int i = 0; i < studList.getLength(); i++) {
             studList.getNode(i).getValue().print();
         }
-
+/*
         //b)
         DLinkedList<Double[]> gradesList = HomeWorkDLList.task08B(studList);
         for (int i = 0; i < gradesList.getLength(); i++) {

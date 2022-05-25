@@ -161,6 +161,7 @@ public class HomeWorkDLList {
         }
         return list2.isVoid();
     }
+
     public static boolean task03(DLinkedList<Integer> listA, DLinkedList<Integer> listB) {
         if (listA.getLength() != listB.getLength()) {
             return false;
@@ -172,26 +173,36 @@ public class HomeWorkDLList {
 
 
     //Task4: You have a list. Insert previous part of the list after each element
+    private static void pushIteration(DLinkedList<Character> list, int index) {
+        Node<Character> nodeIndex = list.getHead();
+        Node<Character> tmp = list.getHead();
+        for (int i = 0; i < index; i++) {
+            nodeIndex = nodeIndex.getNNode();
+        }
+        if (index == list.getLength() - 1) {
+            pushLastInd(list, tmp, index);
+        } else {
+            pushNotLastInd(list, tmp, index);
+        }
+    }
+
+    private static void pushLastInd(DLinkedList<Character> list, Node<Character> tmp, int index) {
+        for (int j = 0; j < index; j++) {
+            list.push(tmp.getValue());
+            tmp = tmp.getNNode();
+        }
+    }
+
+    private static void pushNotLastInd(DLinkedList<Character> list, Node<Character> tmp, int index) {
+        for (int j = 0; j < index; j++) {
+            list.push(tmp.getValue(), index + j + 1);
+            tmp = tmp.getNNode();
+        }
+    }
+
     public static void task04(DLinkedList<Character> list) {
-        Node<Character> nodeIndex;
-        Node<Character> nodeTmp;
         for (int index = list.getLength() - 1; index > 0; index--) {
-            nodeIndex = list.getHead();
-            nodeTmp = list.getHead();
-            for (int i = 0; i < index; i++) {
-                nodeIndex = nodeIndex.getNNode();
-            }
-            if (index == list.getLength() - 1) {
-                for (int j = 0; j < index; j++) {
-                    list.push(nodeTmp.getValue());
-                    nodeTmp = nodeTmp.getNNode();
-                }
-            } else {
-                for (int j = 0; j < index; j++) {
-                    list.push(nodeTmp.getValue(), index + j + 1);
-                    nodeTmp = nodeTmp.getNNode();
-                }
-            }
+            pushIteration(list, index);
         }
     }
 
@@ -246,14 +257,7 @@ public class HomeWorkDLList {
         DLinkedList<Student> list = new DLinkedList<>();
         String str = br.readLine();
         list.push(studentInfo(str), 0);
-        while (true) {
-            try {
-                if ((str = br.readLine()) == null) {
-                    break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        while ((str = br.readLine()) != null) {
             list.push(studentInfo(str));
         }
         return list;
