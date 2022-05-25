@@ -31,7 +31,7 @@ public class HomeWorkDLList {
     }
 
 
-    //Task1: You have 2 descend-ordered lists. Merge them and get one descend-ordered list
+    //Task1: You have 2 descend-ordered lists. Merge them to get one descend-ordered list
     private static DLinkedList<Integer> merge(DLinkedList<Integer> list, Node<Integer> node1, Node<Integer> node2) {
         int count = 0;
         while (node1 != null && node2 != null) {
@@ -148,12 +148,8 @@ public class HomeWorkDLList {
 
 
     //Task3: You have two lists. Find out if their sets are identical
-    public static boolean task03(DLinkedList<Integer> listA, DLinkedList<Integer> listB) {
-        if (listA.getLength() != listB.getLength()) {
-            return false;
-        }
-        DLinkedList<Integer> list1 = new DLinkedList<>(listA);
-        DLinkedList<Integer> list2 = new DLinkedList<>(listB);
+
+    private static boolean isIdentical(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
         int length = list2.getLength();
         while (list1.getHead().getValue() != null) {
             list2.popValue(list1.getHead().getValue());
@@ -165,9 +161,17 @@ public class HomeWorkDLList {
         }
         return list2.isVoid();
     }
+    public static boolean task03(DLinkedList<Integer> listA, DLinkedList<Integer> listB) {
+        if (listA.getLength() != listB.getLength()) {
+            return false;
+        }
+        DLinkedList<Integer> list1 = new DLinkedList<>(listA);
+        DLinkedList<Integer> list2 = new DLinkedList<>(listB);
+        return isIdentical(list1, list2);
+    }
 
 
-    //Task4:
+    //Task4: You have a list. Insert previous part of the list after each element
     public static void task04(DLinkedList<Character> list) {
         Node<Character> nodeIndex;
         Node<Character> nodeTmp;

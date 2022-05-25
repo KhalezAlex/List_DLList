@@ -23,7 +23,7 @@ public class Main {
         list.print();*/
 
 
-        //Task1: You have 2 descend-ordered lists. Combine them and get one descend-ordered list
+        //Task1: You have 2 descend-ordered lists. Combine them to get one descend-ordered list
         /*Integer[] arrayOfInts1Task1 = {77, 66, 45, 22, 14, 7, 3, 1, 0};
         Integer[] arrayOfInts2Task1 = {129, 77, 64, 62, 47};
         Integer[] arrayOfInts3Task1 = {77, 21, 20, 18, 11, 4, 2, 1, 0};
@@ -72,16 +72,16 @@ public class Main {
         list.print();*/
 
         //Task6: You Have a text file. Get a double linked list which elements contain numbers of characters in each line
-        String path = "Students.txt";
-        HomeWorkDLList.task06(new BufferedReader(new FileReader(path))).print();
+        /*String path = "Students.txt";
+        HomeWorkDLList.task06(new BufferedReader(new FileReader(path))).print();*/
 
 
-        //Task8: You have a list of students. Every element contains: second name, father name, first name,
+        //Task8: You have a list of students. Every element contains: second name, first name, father name,
         //year of birth, course, group number, five subject grades.
         //What needs to be done:
         //a) List is to be sorted by course (students are to be sorted by alphabet inside one course)
-        //b) Average grade by all subjects gor each group
-        //c) Find out the youngest and the oldest student in university
+        //b) Average subject grades gor each group
+        //c) Find out who is the youngest and the oldest student in university
         //d) Find the best student according to his average grade for each group
         /*
         //a)
