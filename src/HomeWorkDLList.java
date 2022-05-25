@@ -11,6 +11,7 @@ public class HomeWorkDLList {
         }
         return (word1.length() < word2.length());
     }
+
     public static void task0(DLinkedList<String> list, String book) {
         if (isAlphabet(book, list.getHead().getValue())) {
             list.push(book, 0);
@@ -34,7 +35,7 @@ public class HomeWorkDLList {
     private static DLinkedList<Integer> merge(DLinkedList<Integer> list, Node<Integer> node1, Node<Integer> node2) {
         int count = 0;
         while (node1 != null && node2 != null) {
-            if ( node2.getValue() >= node1.getValue()) {
+            if (node2.getValue() >= node1.getValue()) {
                 list.push(node2.getValue(), count);
                 node2 = node2.getNNode();
             } else {
@@ -44,6 +45,7 @@ public class HomeWorkDLList {
         }
         return list;
     }
+
     public static DLinkedList<Integer> task01(DLinkedList<Integer> list1, DLinkedList<Integer> list2) {
         Node<Integer> node1;
         Node<Integer> node2;
@@ -71,11 +73,13 @@ public class HomeWorkDLList {
         }
         return null;
     }
+
     private static void changeValues(Node<Integer> node1, Node<Integer> node2) {
         Integer tmp = node1.getValue();
         node1.setValue(node2.getValue());
         node2.setValue(tmp);
     }
+
     private static boolean bubbleIteration(Node<Integer> node1, Node<Integer> node2) {
         int counter = 0;
         while (node2 != null) {
@@ -89,6 +93,7 @@ public class HomeWorkDLList {
         }
         return counter == 0;
     }
+
     private static void ifNegativeHead(DLinkedList<Integer> list) {
         for (int i = 0; i < list.getLength() - 1; i++) {
             Node<Integer> node1 = getNextPos(list.getHead());
@@ -100,6 +105,7 @@ public class HomeWorkDLList {
             }
         }
     }
+
     private static void ifPositiveHead(DLinkedList<Integer> list) {
         for (int i = 0; i < list.getLength() - 1; i++) {
             Node<Integer> node1 = list.getHead();
@@ -109,11 +115,11 @@ public class HomeWorkDLList {
             }
         }
     }
+
     public static void task02A(DLinkedList<Integer> list) {
         if (list.getHead().getValue() <= 0) {
             ifNegativeHead(list);
-        }
-        else {
+        } else {
             ifPositiveHead(list);
         }
     }
@@ -121,7 +127,8 @@ public class HomeWorkDLList {
     private static Node<Integer> getNextEvenInd(Node<Integer> node) {
         return node.getNNode().getNNode();
     }
-    private static void evenBubbleIteration (DLinkedList<Integer> list) {
+
+    private static void evenBubbleIteration(DLinkedList<Integer> list) {
         Node<Integer> node1 = list.getHead();
         Node<Integer> node2 = getNextEvenInd(list.getHead());
         while (node2 != null) {
@@ -132,6 +139,7 @@ public class HomeWorkDLList {
             node2 = getNextEvenInd(node2);
         }
     }
+
     public static void task02B(DLinkedList<Integer> list) {
         for (int i = 0; i < list.getLength() / 2; i++) {
             evenBubbleIteration(list);
@@ -200,15 +208,11 @@ public class HomeWorkDLList {
     private static void initializeList(DLinkedList<Integer> list, BufferedReader bR) throws IOException {
         String str = bR.readLine();
         list.push(str.length());
-        while (true) {
-            try {
-                if ((str = bR.readLine()) == null) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        while ((str = bR.readLine()) != null) {
             list.push(str.length());
         }
     }
+
     public static DLinkedList<Integer> task06(BufferedReader bR) throws IOException {
         DLinkedList<Integer> list = new DLinkedList<>();
         initializeList(list, bR);
@@ -233,6 +237,7 @@ public class HomeWorkDLList {
         }
         return new Student(name, Integer.parseInt(sA[3]), Integer.parseInt(sA[4]), sA[5], grades);
     }
+
     public static DLinkedList<Student> students(BufferedReader br) throws IOException {
         DLinkedList<Student> list = new DLinkedList<>();
         String str = br.readLine();
@@ -263,6 +268,7 @@ public class HomeWorkDLList {
             }
         }
     }
+
     private static String studName(Student stud) {
         StringBuilder sB = new StringBuilder();
         for (int i = 0; i < 3; i++) {
@@ -270,6 +276,7 @@ public class HomeWorkDLList {
         }
         return sB.toString();
     }
+
     private static void sortByAlphabet(DLinkedList<Student> list) {
         Student tmp;
         for (int i = list.getLength() - 1; i > 0; i--) {
@@ -283,6 +290,7 @@ public class HomeWorkDLList {
             }
         }
     }
+
     public static void task08A(DLinkedList<Student> list) {
         sortByAlphabet(list);
         sortByCourse(list);
@@ -300,13 +308,14 @@ public class HomeWorkDLList {
             counterStuds++;
             node = node.getNNode();
         }
-        counterStuds ++;
+        counterStuds++;
         for (int i = 0; i < 5; i++) {
             avgGr[i] += (double) node.getValue().getGrades()[i];
             avgGr[i] = (double) ((int) (100 * avgGr[i]) / (counterStuds)) / 100;
         }
         return avgGr;
     }
+
     public static DLinkedList<Double[]> task08B(DLinkedList<Student> list) {
         DLinkedList<Double[]> avgGradesList = new DLinkedList<>();
         Node<Student> tmp = list.getHead();
@@ -335,6 +344,7 @@ public class HomeWorkDLList {
         }
         return name;
     }
+
     private static String old(Node<Student> stud) {
         String name = stud.getValue().getName()[0].concat(" ").concat(stud.getValue().getName()[1]).
                 concat(" ").concat(stud.getValue().getName()[2]);
@@ -349,6 +359,7 @@ public class HomeWorkDLList {
         }
         return name;
     }
+
     public static String task08C(DLinkedList<Student> list, boolean isJun) {
         if (isJun) {
             return young(list.getHead());
@@ -373,6 +384,7 @@ public class HomeWorkDLList {
         }
         return name;
     }
+
     public static DLinkedList<String> task08D(DLinkedList<Student> list) {
         DLinkedList<String> avgGrList = new DLinkedList<>();
         Node<Student> tmp = list.getHead();
