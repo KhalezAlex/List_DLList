@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         //Task0: You have an ordered list of books. Insert a new book saving the alphabet order
         /*String[] arrayOfBooksTask0 = {"Bible", "Decameron", "Diary of a Bookseller", "Jeeves and Wooster",
                 "Jungle book", "Lord of the Rings", "Treasure Island"};
@@ -89,7 +88,7 @@ public class Main {
         //d) Find the best student according to his average grade for each group
 
         //a)
-        String path = "StudentsBuffer.txt";
+        /*String path = "StudentsBuffer.txt";
         DLinkedList<Student> studList = HomeWorkDLList.students(new BufferedReader(new FileReader(path)));
         HomeWorkDLList.task08A(studList);
         for (int i = 0; i < studList.getLength(); i++) {
@@ -103,7 +102,7 @@ public class Main {
         }
 
         //c)
-        /*System.out.println("Самый молодой студент- " + HomeWorkDLList.task08C(studList,true));
+        System.out.println("Самый молодой студент- " + HomeWorkDLList.task08C(studList,true));
         System.out.println("Самый старший студент- " + HomeWorkDLList.task08C(studList, false));
 
         //d)
