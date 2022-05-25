@@ -305,8 +305,8 @@ public class HomeWorkDLList {
     }
 
     //b)
-    private static Double[] avgGradesGroup(Node<Student> node) {
-        Double[] avgGr = {0.0, 0.0, 0.0, 0.0, 0.0};
+    //считает студентов и меняет суммарную оценку по предметам одновременно- нет смысла разделять методы
+    private  static int counterStuds(Double[] avgGr, Node<Student> node) {
         int counterStuds = 0;
         while (node.getNNode() != null && (node.getValue()).getGroup().equals
                 ((node.getNNode().getValue()).getGroup())) {
@@ -319,6 +319,13 @@ public class HomeWorkDLList {
         counterStuds++;
         for (int i = 0; i < 5; i++) {
             avgGr[i] += (double) node.getValue().getGrades()[i];
+        }
+        return counterStuds;
+    }
+    private static Double[] avgGradesGroup(Node<Student> node) {
+        Double[] avgGr = {0.0, 0.0, 0.0, 0.0, 0.0};
+        int counterStuds = counterStuds(avgGr,node);
+        for (int i = 0; i < 5; i++) {
             avgGr[i] = (double) ((int) (100 * avgGr[i]) / (counterStuds)) / 100;
         }
         return avgGr;

@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -94,7 +95,7 @@ public class Main {
         for (int i = 0; i < studList.getLength(); i++) {
             studList.getNode(i).getValue().print();
         }
-/*
+
         //b)
         DLinkedList<Double[]> gradesList = HomeWorkDLList.task08B(studList);
         for (int i = 0; i < gradesList.getLength(); i++) {
@@ -102,7 +103,7 @@ public class Main {
         }
 
         //c)
-        System.out.println("Самый молодой студент- " + HomeWorkDLList.task08C(studList,true));
+        /*System.out.println("Самый молодой студент- " + HomeWorkDLList.task08C(studList,true));
         System.out.println("Самый старший студент- " + HomeWorkDLList.task08C(studList, false));
 
         //d)
