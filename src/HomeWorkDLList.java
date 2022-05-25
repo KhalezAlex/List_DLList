@@ -12,21 +12,25 @@ public class HomeWorkDLList {
         return (word1.length() < word2.length());
     }
 
+    private static void pushNotHead(DLinkedList<String> list, String book) {
+        Node<String> tmp = list.getHead();
+        while (tmp.getNNode() != null) {
+            if (isAlphabet(tmp.getValue(), book) && isAlphabet(book, tmp.getNNode().getValue())) {
+                Node<String> newNode = new Node<>(book, tmp.getNNode(), tmp);
+                tmp.getNNode().setPNode(newNode);
+                tmp.setNNode(newNode);
+                return;
+            }
+            tmp = tmp.getNNode();
+        }
+        tmp.setNNode(new Node<>(book, null, tmp));
+    }
+
     public static void task0(DLinkedList<String> list, String book) {
         if (isAlphabet(book, list.getHead().getValue())) {
             list.push(book, 0);
         } else {
-            Node<String> tmp = list.getHead();
-            while (tmp.getNNode() != null) {
-                if (isAlphabet(tmp.getValue(), book) && isAlphabet(book, tmp.getNNode().getValue())) {
-                    Node<String> newNode = new Node<>(book, tmp.getNNode(), tmp);
-                    tmp.getNNode().setPNode(newNode);
-                    tmp.setNNode(newNode);
-                    return;
-                }
-                tmp = tmp.getNNode();
-            }
-            tmp.setNNode(new Node<>(book, null, tmp));
+            pushNotHead(list, book);
         }
     }
 
@@ -166,19 +170,6 @@ public class HomeWorkDLList {
 
 
     //Task4: You have a list. Insert previous part of the list after each element
-    private static void pushIteration(DLinkedList<Character> list, int index) {
-        Node<Character> nodeIndex = list.getHead();
-        Node<Character> tmp = list.getHead();
-        for (int i = 0; i < index; i++) {
-            nodeIndex = nodeIndex.getNNode();
-        }
-        if (index == list.getLength() - 1) {
-            pushLastInd(list, tmp, index);
-        } else {
-            pushNotLastInd(list, tmp, index);
-        }
-    }
-
     private static void pushLastInd(DLinkedList<Character> list, Node<Character> tmp, int index) {
         for (int j = 0; j < index; j++) {
             list.push(tmp.getValue());
@@ -190,6 +181,19 @@ public class HomeWorkDLList {
         for (int j = 0; j < index; j++) {
             list.push(tmp.getValue(), index + j + 1);
             tmp = tmp.getNNode();
+        }
+    }
+
+    private static void pushIteration(DLinkedList<Character> list, int index) {
+        Node<Character> nodeIndex = list.getHead();
+        Node<Character> tmp = list.getHead();
+        for (int i = 0; i < index; i++) {
+            nodeIndex = nodeIndex.getNNode();
+        }
+        if (index == list.getLength() - 1) {
+            pushLastInd(list, tmp, index);
+        } else {
+            pushNotLastInd(list, tmp, index);
         }
     }
 
@@ -237,13 +241,14 @@ public class HomeWorkDLList {
     //d) Find the best student according to his average grade for each group
 
     private static Student studentInfo(String str) {
-        String[] sA = str.split(" ");
-        String[] name = new String[]{sA[0], sA[1], sA[2]};
+        String[] studInfoArr = str.split(" ");
+        String[] name = new String[]{studInfoArr[0], studInfoArr[1], studInfoArr[2]};
         int[] grades = new int[5];
         for (int i = 0; i < 5; i++) {
-            grades[i] = Integer.parseInt(sA[6 + i]);
+            grades[i] = Integer.parseInt(studInfoArr[6 + i]);
         }
-        return new Student(name, Integer.parseInt(sA[3]), Integer.parseInt(sA[4]), sA[5], grades);
+        return new Student(name, Integer.parseInt(studInfoArr[3]), Integer.parseInt(studInfoArr[4]),
+                            studInfoArr[5], grades);
     }
 
     public static DLinkedList<Student> students(BufferedReader br) throws IOException {
@@ -279,14 +284,14 @@ public class HomeWorkDLList {
     }
 
     private static void sortByAlphabet(DLinkedList<Student> list) {
-        Student tmp;
+        Student studTmp;
         for (int i = list.getLength() - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (!isAlphabet(studName(list.getNode(j).getValue()),
                         studName(list.getNode(j + 1).getValue()))) {
-                    tmp = list.getNode(j).getValue();
+                    studTmp = list.getNode(j).getValue();
                     list.getNode(j).setValue((list.getNode(j + 1).getValue()));
-                    list.getNode(j + 1).setValue(tmp);
+                    list.getNode(j + 1).setValue(studTmp);
                 }
             }
         }
@@ -327,12 +332,12 @@ public class HomeWorkDLList {
 
     public static DLinkedList<Double[]> task08B(DLinkedList<Student> list) {
         DLinkedList<Double[]> avgGradesList = new DLinkedList<>();
-        Node<Student> tmp = list.getHead();
-        avgGradesList.push(avgGradesGroup(tmp));
-        while (tmp.getNNode() != null) {
-            tmp = tmp.getNNode();
-            if (!(tmp.getValue()).getGroup().equals((tmp.getPNode().getValue()).getGroup())) {
-                avgGradesList.push(avgGradesGroup(tmp));
+        Node<Student> studTmp = list.getHead();
+        avgGradesList.push(avgGradesGroup(studTmp));
+        while (studTmp.getNNode() != null) {
+            studTmp = studTmp.getNNode();
+            if (!(studTmp.getValue()).getGroup().equals((studTmp.getPNode().getValue()).getGroup())) {
+                avgGradesList.push(avgGradesGroup(studTmp));
             }
         }
         return avgGradesList;
@@ -396,12 +401,12 @@ public class HomeWorkDLList {
 
     public static DLinkedList<String> task08D(DLinkedList<Student> list) {
         DLinkedList<String> avgGrList = new DLinkedList<>();
-        Node<Student> tmp = list.getHead();
-        avgGrList.push(bestGrStud(tmp));
-        while (tmp.getNNode() != null) {
-            tmp = tmp.getNNode();
-            if (!tmp.getValue().getGroup().equals(tmp.getPNode().getValue().getGroup())) {
-                avgGrList.push(bestGrStud(tmp));
+        Node<Student> studTmp = list.getHead();
+        avgGrList.push(bestGrStud(studTmp));
+        while (studTmp.getNNode() != null) {
+            studTmp = studTmp.getNNode();
+            if (!studTmp.getValue().getGroup().equals(studTmp.getPNode().getValue().getGroup())) {
+                avgGrList.push(bestGrStud(studTmp));
             }
         }
         return avgGrList;
