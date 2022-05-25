@@ -158,6 +158,9 @@ public class DLinkedList<T> {
                 node.getNNode().setPNode(node);
                 tmp.setNNode(node);
             }
+            else {
+                this.pushHead(val);
+            }
         }
         this.length++;
     }
@@ -209,9 +212,7 @@ public class DLinkedList<T> {
     /**deletes the first element in the list*/
     public void popHead() {
         if(this.head.getNNode() == null) {
-            this.head.setPNode(null);
-            this.head.setNNode(null);
-            this.head.setValue(null);
+            this.head = null;
         }
         else {
             this.head = this.head.getNNode();
@@ -234,7 +235,6 @@ public class DLinkedList<T> {
         while (tmp != null) {
             if (tmp.getValue() == val) {
                 this.pop(count);
-                count--;
                 break;
             }
             count++;
