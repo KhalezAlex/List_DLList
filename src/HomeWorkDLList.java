@@ -322,6 +322,7 @@ public class HomeWorkDLList {
         }
         return counterStuds;
     }
+
     private static Double[] avgGradesGroup(Node<Student> node) {
         Double[] avgGr = {0.0, 0.0, 0.0, 0.0, 0.0};
         int counterStuds = counterStuds(avgGr,node);
